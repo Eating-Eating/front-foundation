@@ -1,3 +1,0 @@
-# asfasf
-
-> An awesome project.

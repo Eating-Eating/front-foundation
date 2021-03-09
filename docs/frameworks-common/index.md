@@ -306,4 +306,4 @@ Template更加静态化并且对于表达式有更多约束，但是可以快速
 >
 > Watcher负责收集依赖，清除依赖和通知依赖。在大型复杂的组件树结构下，由于采用了精确的依赖追踪系统，所以会避免组件的过度渲染。
 
-![preview](https://segmentfault.com/img/remote/1460000016945251?w=937&h=476/view)
+<img src='./frameworks-common/view.png'></img>
