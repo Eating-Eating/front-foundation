@@ -99,7 +99,7 @@ export const Deletion = /*              */ 0b0000000001000;
 
 为了解决这个问题，`React16`将**递归的无法中断的更新**重构为**异步的可中断更新**，由于曾经用于递归的**虚拟DOM**数据结构已经无法满足需要。于是，全新的`Fiber`架构应运而生。
 
-## [#](https://react.iamkasong.com/process/fiber.html#fiber的含义)Fiber的含义
+## Fiber的含义
 
 `Fiber`包含三层含义：
 
