@@ -6,9 +6,15 @@
   - [开发笔记-ES6与cjs的区别](components/esm-cjs-diff.md)
   - [开发笔记-个人总结](components/summary.md)
 
-- 单点登录
+- 管理支撑平台
 
   - [单点登录分享](sso-share/index.md)
+  - [微前端分享](micro-front/micro-fe.md)
+
+- yeasales营销平台
+
+  - [安全性](yeasales/security.md)
+  - [性能监控](yeasales/performance.md)
 
 - 视野拓展
 
