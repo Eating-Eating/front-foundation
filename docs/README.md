@@ -1,5 +1,6 @@
-# Black-Word-Underground-King
+# 拿出你的100%！！！！
 
-<img src="https://inews.gtimg.com/newsapp_bt/0/5496887848/641">
+<img src="https://tva2.sinaimg.cn/large/6a51233cjw1e6melakegcj20go0b5q53.jpg">
 
-> zhangjiaqian personal zone.
+> #### zhangjiaqian personal zone
+> #### contact me wx: 601496811/mail: 601496811@qq.com
