@@ -307,17 +307,17 @@ destroy@~1.0.4:
   resolved "https://registry.npm.taobao.org/destroy/download/destroy-1.0.4.tgz#978857442c44749e4206613e37946205826abd80"
   integrity sha1-l4hXRCxEdJ5CBmE+N5RiBYJqvYA=
 
-docsify-cli@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.npm.taobao.org/docsify-cli/download/docsify-cli-4.4.2.tgz#f4e788ff111e00a15d7727156c2bef04d021aa56"
-  integrity sha1-9OeI/xEeAKFddycVbCvvBNAhqlY=
+docsify-cli@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.npm.taobao.org/docsify-cli/download/docsify-cli-4.4.3.tgz#5f75d9478d7da27ac1c129d446bf0d4fe70c93d9"
+  integrity sha1-X3XZR419onrBwSnURr8NT+cMk9k=
   dependencies:
     chalk "^2.4.2"
     connect "^3.6.0"
     connect-livereload "^0.6.0"
     cp-file "^7.0.0"
-    docsify "^4.10.2"
-    docsify-server-renderer ">=4"
+    docsify "^4.12.1"
+    docsify-server-renderer ">=4.10.0"
     enquirer "^2.3.6"
     fs-extra "^8.1.0"
     get-port "^5.0.0"
@@ -329,7 +329,7 @@ docsify-cli@^4.4.2:
     yargonaut "^1.1.2"
     yargs "^14.2.0"
 
-docsify-server-renderer@>=4:
+docsify-server-renderer@>=4.10.0:
   version "4.12.1"
   resolved "https://registry.npm.taobao.org/docsify-server-renderer/download/docsify-server-renderer-4.12.1.tgz#f1d5ca156d4352ae78e64cf2243e98da3c249485"
   integrity sha1-8dXKFW1DUq545kzyJD6Y2jwklIU=
@@ -340,7 +340,7 @@ docsify-server-renderer@>=4:
     node-fetch "^2.6.0"
     resolve-pathname "^3.0.0"
 
-docsify@^4.10.2, docsify@^4.12.0:
+docsify@^4.12.0, docsify@^4.12.1:
   version "4.12.1"
   resolved "https://registry.npm.taobao.org/docsify/download/docsify-4.12.1.tgz#46c15a4c101397185835f7e6bdad7bd6cd02896b"
   integrity sha1-RsFaTBATlxhYNffmva171s0CiWs=
