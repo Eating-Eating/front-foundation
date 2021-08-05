@@ -2,24 +2,12 @@ import * as React from 'react';
 import Container from '@material-ui/core/Container';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
-import ProTip from './ProTip';
-import { BrowserRouter } from "react-router-dom";
-import { AppBar, Breadcrumbs, Drawer, IconButton, Toolbar } from '@material-ui/core';
+import { BrowserRouter,Redirect,Route } from "react-router-dom";
+import { AppBar, Breadcrumbs, Drawer, IconButton } from '@material-ui/core';
 import './style.scss'
 import { useState } from 'react';
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
+import BasePage from './pages/shared/BasePage'
 function handleClick(event: { preventDefault: () => void; }) {
   event.preventDefault();
   console.info('You clicked a breadcrumb.');
@@ -30,7 +18,7 @@ export default function App() {
   const mainList = ["React","Vue","JavaScript","TypeScript","性能监控概述","数据结构","webpack","浏览器相关","网络"]
   return (
     <BrowserRouter>
-      <AppBar>
+      <AppBar className="headerContainer">
           <IconButton
             edge="start"
             color="inherit"
@@ -39,7 +27,7 @@ export default function App() {
           >
             <MenuIcon />
           </IconButton>
-          <Breadcrumbs>
+          <Breadcrumbs className="menuBreadcrumbs">
             <Link color="inherit" href="/" onClick={handleClick}>
               Material-UI
             </Link>
@@ -49,21 +37,13 @@ export default function App() {
             <Typography color="textPrimary">Breadcrumb</Typography>
           </Breadcrumbs>
       </AppBar>
-      <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Create React App v5-beta example with TypeScript
-          </Typography>
-          <ProTip />
-          <Copyright />
-        </Box>
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Create React App v5-beta example with TypeScript
-          </Typography>
-          <ProTip />
-          <Copyright />
-        </Box>
+      <Container maxWidth="sm" className="appContainer">
+          <Route path="/">
+            <Redirect to="/react" />
+          </Route>
+          <Route  path="/react">
+            <BasePage/>
+          </Route>
       </Container>
       <Drawer 
         anchor="left" 
@@ -71,7 +51,7 @@ export default function App() {
         onClose={()=>setDrawer(false)}
         classes={{paper:"modalStyle"}}
       >
-        {mainList.map(key=><div>{key}</div>)}
+        {mainList.map(key=><div className="navBlock" key={key}>{key}</div>)}
       </Drawer>
     </BrowserRouter>
   );

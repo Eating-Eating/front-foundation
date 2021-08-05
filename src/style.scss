@@ -1,10 +1,21 @@
-.menuIcon{
-  width: 70px;
+
+.headerContainer{
+  .menuBreadcrumbs{
+    margin-left: 30px;
+  }
+  .menuIcon{
+    width: 70px;
+    margin-left: 10px;
+  }
 }
 .modalStyle{
-  width: 200px;
+  width: 300px;
   background-color: yellow !important;
 }
 .appContainer{
-
+  margin-top: 150px;
+}
+.navBlock{
+  line-height: 100px;
+  text-align: center;
 }
