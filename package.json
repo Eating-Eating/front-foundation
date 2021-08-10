@@ -8,9 +8,11 @@
     "@emotion/styled": "latest",
     "@material-ui/core": "next",
     "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.4",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
     "@reduxjs/toolkit": "^1.6.1",
     "@svgr/webpack": "5.5.0",
+    "@types/lodash": "^4.14.172",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-redux": "^7.1.18",
@@ -46,6 +48,9 @@
     "jest-circus": "26.6.0",
     "jest-resolve": "26.6.0",
     "jest-watch-typeahead": "0.6.1",
+    "lodash": "^4.17.21",
+    "markdown-it": "^12.2.0",
+    "material-ui-popup-state": "^1.9.0",
     "mini-css-extract-plugin": "0.11.3",
     "node-sass": "^6.0.1",
     "optimize-css-assets-webpack-plugin": "5.0.4",
@@ -79,8 +84,8 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "cross-env PUBLIC_URL=/eating-eating/ node scripts/start.js",
+    "build": "cross-env PUBLIC_URL=/eating-eating/ node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "browserslist": {

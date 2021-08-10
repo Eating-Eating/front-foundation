@@ -1,5 +1,3 @@
-
-
 const fs = require('fs');
 const path = require('path');
 const webpack = require('webpack');
@@ -122,25 +120,25 @@ module.exports = function (webpackEnv) {
           // https://github.com/facebook/create-react-app/issues/2677
           ident: 'postcss',
           plugins: () => [
-            require("./px-to-vw/index.js")({
-              unitToConvert: "px", // 要转化的单位
-              viewportWidth: 750, // UI设计稿的宽度
-              unitPrecision: 6, // 转换后的精度，即小数点位数
-              propList: ["*"], // 指定转换的css属性的单位，*代表全部css属性的单位都进行转换
-              viewportUnit: "vw", // 指定需要转换成的视窗单位，默认vw
-              fontViewportUnit: "vw", // 指定字体需要转换成的视窗单位，默认vw
-              selectorBlackList: ["wrap"], // 指定不转换为视窗单位的类名，
-              minPixelValue: 1, // 默认值1，小于或等于1px则不进行转换
-              mediaQuery: false, // 是否在媒体查询的css代码中也进行转换，默认false
-              replace: true, // 是否转换后直接更换属性值
-              exclude: [/node_modules/], // 设置忽略文件，用正则做目录名匹配
-              landscape: true,
-              landscapeUnit: "vw",
-              landscapeWidth: 3200,
-              // - `landscape` (Boolean) 是否添加根据 `landscapeWidth` 生成的媒体查询条件 `@media (orientation: landscape)`
-              // - `landscapeUnit` (String) 横屏时使用的单位
-              // - `landscapeWidth` (Number) 横屏时使用的视口宽度
-            }),
+            // require("./px-to-vw/index.js")({
+            //   unitToConvert: "px", // 要转化的单位
+            //   viewportWidth: 750, // UI设计稿的宽度
+            //   unitPrecision: 6, // 转换后的精度，即小数点位数
+            //   propList: ["*"], // 指定转换的css属性的单位，*代表全部css属性的单位都进行转换
+            //   viewportUnit: "vw", // 指定需要转换成的视窗单位，默认vw
+            //   fontViewportUnit: "vw", // 指定字体需要转换成的视窗单位，默认vw
+            //   selectorBlackList: ["wrap"], // 指定不转换为视窗单位的类名，
+            //   minPixelValue: 1, // 默认值1，小于或等于1px则不进行转换
+            //   mediaQuery: false, // 是否在媒体查询的css代码中也进行转换，默认false
+            //   replace: true, // 是否转换后直接更换属性值
+            //   include: [/node_modules\/\@material-ui/], // 设置忽略文件，用正则做目录名匹配
+            //   landscape: true,
+            //   landscapeUnit: "vw",
+            //   landscapeWidth: 3200,
+            //   // - `landscape` (Boolean) 是否添加根据 `landscapeWidth` 生成的媒体查询条件 `@media (orientation: landscape)`
+            //   // - `landscapeUnit` (String) 横屏时使用的单位
+            //   // - `landscapeWidth` (Number) 横屏时使用的视口宽度
+            // }),
             require('postcss-flexbugs-fixes'),
             require('postcss-preset-env')({
               autoprefixer: {
@@ -344,6 +342,7 @@ module.exports = function (webpackEnv) {
         .map(ext => `.${ext}`)
         .filter(ext => useTypeScript || !ext.includes('ts')),
       alias: {
+        "@":paths.appSrc,
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
@@ -451,6 +450,56 @@ module.exports = function (webpackEnv) {
                 cacheCompression: false,
                 compact: isEnvProduction,
               },
+            },
+            //md-loader
+            {
+              test: /\.(md)$/,
+              include: paths.appSrc,
+              use: [
+                {
+                  loader: require.resolve('babel-loader'),
+                  options: {
+                    customize: require.resolve(
+                      'babel-preset-react-app/webpack-overrides'
+                    ),
+                    presets: [
+                      [
+                        require.resolve('babel-preset-react-app'),
+                        {
+                          runtime: hasJsxRuntime ? 'automatic' : 'classic',
+                        },
+                      ],
+                    ],
+                    
+                    plugins: [
+                      [
+                        require.resolve('babel-plugin-named-asset-import'),
+                        {
+                          loaderMap: {
+                            svg: {
+                              ReactComponent:
+                                '@svgr/webpack?-svgo,+titleProp,+ref![path]',
+                            },
+                          },
+                        },
+                      ],
+                      isEnvDevelopment &&
+                        shouldUseReactRefresh &&
+                        require.resolve('react-refresh/babel'),
+                    ].filter(Boolean),
+                    // This is a feature of `babel-loader` for webpack (not Babel itself).
+                    // It enables caching results in ./node_modules/.cache/babel-loader/
+                    // directory for faster rebuilds.
+                    cacheDirectory: true,
+                    // See #6846 for context on why cacheCompression is disabled
+                    cacheCompression: false,
+                    compact: isEnvProduction,
+                  },
+                },
+                {
+                  loader: path.resolve(__dirname, './markdown-loader/index.js')
+                },
+              ],
             },
             // Process any JS outside of the app with Babel.
             // Unlike the application JS, we only compile the standard ES features.
