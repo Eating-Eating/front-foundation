@@ -27,13 +27,6 @@ const useStyles = makeStyles((theme:any) =>{
       right:'50px',
       top:'auto'
     },
-    bottom: {
-      position: "fixed",
-      bottom:0,
-      left:0,
-      right:0,
-      top:'auto'
-    },
   })
 });
 const ListItemLink = (props: ListItemProps<'a', { button?: true }>)=>{
@@ -77,23 +70,26 @@ const BasePage:FC<{}> = ({children})=> {
   },[location])
   const routes = useAppSelector((state)=>state.routes)
   const nowState = useMemo(()=>{
-    let tempArr:singleCata = {
+    let temp:singleCata = {
       label:'',
       mdPath:"",
       routePath:'',
       keyWords:[]
     }
-    const rec = (arr:singleCata[])=>{
+    const rec = (arr:singleCata[] | string[])=>{
       if(arr.length>0){
         arr.forEach(key=>{
-          if(key.routePath === location.pathname){
-            tempArr = key
+          if(typeof key !== "string"){
+            if(key.routePath === location.pathname){
+              temp = key
+            }
+            rec(key.keyWords)
           }
         })
       }
     }
     rec(routes)
-    return tempArr
+    return temp
   },[location.pathname, routes])
   const [ifDrawer,setDrawer] = useState(false)
   // const [bottomValue,setBottomValue] = useState('whatis')
@@ -121,34 +117,32 @@ const BasePage:FC<{}> = ({children})=> {
   </AppBar>
   </HideOnScroll>
       <Grid container justifyContent="flex-start" spacing={1}>
-        {nowState.keyWords.map((key)=>
-        <Grid item key={key.routePath}>
-          <Chip
-            label={key.label}
-            onClick={()=>{
-              history.push(key.routePath)
-            }}
-          />
-          </Grid>
+        {nowState.keyWords.map((key)=>{
+          if(typeof key === "string"){
+            return <Grid item key={key}>
+            <Chip
+              label={key}
+            />
+            </Grid>
+          }else{
+            return <Grid item key={key.routePath + key.label}>
+            <Chip
+              label={key.label}
+              onClick={()=>{
+                if(key.routePath){
+                  history.push(key.routePath)
+                }
+              }}
+            />
+            </Grid>
+          }
+        }
+        
           )}
       </Grid>
       <Container maxWidth="lg">
       {children}
       </Container>
-    {/* <BottomNavigation
-      value={bottomValue}
-      onChange={(event, newValue) => {
-        setBottomValue(newValue);
-        history.push(``)
-      }}
-      showLabels
-      className={classes.bottom}
-      >
-      <BottomNavigationAction value="whatis" label="是什么" icon={<QuestionAnswerIcon />} />
-      <BottomNavigationAction value="issue" label="缺陷/优化" icon={<QuestionAnswerIcon />} />
-      <BottomNavigationAction value="scenario" label="应用场景" icon={<QuestionAnswerIcon />} />
-      <BottomNavigationAction value="replacement" label="替代方案" icon={<QuestionAnswerIcon />} />
-    </BottomNavigation> */}        
       <PopupState variant="popover" popupId="demo-popup-popover">
       {(popupState: any) => (
         <div>
@@ -199,7 +193,9 @@ const BasePage:FC<{}> = ({children})=> {
         classes={{paper:"modalStyle"}}
       >
         {routes.map(key=><div className="navBlock" key={key.routePath} onClick={()=>{
-          history.push(key.routePath)
+          if(key.routePath){
+            history.push(key.routePath)
+          }
           setDrawer(false)
         }}>{key.label}</div>)}
       </Drawer>
