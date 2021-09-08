@@ -5,8 +5,14 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { createTheme } from '@material-ui/core/styles';
 import BasePage from '@/pages/shared/BasePage'
 import {AsyncCompoennt} from './pages/shared/asyncComponent'
-import {BeTheKing} from '@/pages/BeTheKing'
 import {BottomNav} from '@/pages/shared/BottomNav'
+import { lazy, Suspense } from 'react';
+
+const BeTheKing = lazy(() =>
+  import('./pages/BeTheKing')
+    .then(({ BeTheKing }) => ({ default: BeTheKing })),
+);
+
 function App() {
   const theme = createTheme({
     palette: {
@@ -28,7 +34,9 @@ function App() {
     <BottomNav>
       <Switch>
         <Route path="/beTheKing" exact>
-          <BeTheKing/>
+          <Suspense fallback={null}>
+            <BeTheKing/>
+          </Suspense>
         </Route>
         <BasePage>
         <Route path="/react" key="/react" exact>
